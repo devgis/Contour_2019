@@ -1,0 +1,10 @@
+!table
+!version 700
+!charset WindowsSimpChinese
+
+Definition Table
+  Type NATIVE Charset "WindowsSimpChinese"
+  Fields 3
+    地块编号 Char (12) ;
+    面积亩 Decimal (12, 2) Index 2 ;
+    有机质 Decimal (5, 2) Index 1 ;

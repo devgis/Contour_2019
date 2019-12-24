@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<WorkSpace name="" version="MXP_WorkSpace_1_3" date="2019-12-24T08:53:45+08:00" xmlns:gml="http://www.opengis.net/gml" xmlns="http://www.mapinfo.com/mxp">
+  <ConnectionSet />
+  <DataSourceDefinitionSet>
+    <TABFileDataSourceDefinition id="id1" readOnly="false">
+      <DataSourceName>地块</DataSourceName>
+      <FileName>地块.TAB</FileName>
+    </TABFileDataSourceDefinition>
+    <TABFileDataSourceDefinition id="id2" readOnly="false">
+      <DataSourceName>边界</DataSourceName>
+      <FileName>边界.TAB</FileName>
+    </TABFileDataSourceDefinition>
+    <TABFileDataSourceDefinition id="id3" readOnly="false">
+      <DataSourceName>采样点</DataSourceName>
+      <FileName>采样点.TAB</FileName>
+    </TABFileDataSourceDefinition>
+  </DataSourceDefinitionSet>
+  <MapDefinitionSet>
+    <MapDefinition id="id4" name="Map1" alias="Map1">
+      <DisplayConditions>
+        <MapSize uom="mapinfo:imagesize pixel">
+          <ImageWidth>986</ImageWidth>
+          <ImageHeight>616</ImageHeight>
+        </MapSize>
+        <ZoomAndCenter>
+          <MapZoom uom="mapinfo:length mi">13.617901</MapZoom>
+          <gml:Point srsName="mapinfo:coordsys 1,104">
+            <gml:coordinates>123.374829940715,42.010973718892195</gml:coordinates>
+          </gml:Point>
+        </ZoomAndCenter>
+        <DisplayCoordSys>
+          <SRSName>mapinfo:coordsys 1,104</SRSName>
+        </DisplayCoordSys>
+        <ResizeMethod>preserveZoom</ResizeMethod>
+        <RasterConditions dither="halfTone" rasterReprojectionResampling="cubicConvolution" rasterReprojection="none" trueColor="true" optimizeRasterLayers="screen" optimizeVectorLayers="screen" />
+        <RenderingOptions enableOpacity="false" enableAntiAlias="false" />
+      </DisplayConditions>
+      <LayerList>
+        <FeatureLayer id="id5" name="采样点" alias="采样点" volatile="unknown">
+          <Visibility visible="true">
+            <VisibleRange enabled="false">
+              <ZoomRange uom="mapinfo:length mi" minInclusive="true" maxInclusive="false">0 0</ZoomRange>
+            </VisibleRange>
+          </Visibility>
+          <DataSourceRef ref="id3" />
+        </FeatureLayer>
+        <FeatureLayer id="id6" name="地块" alias="地块" volatile="unknown">
+          <Visibility visible="true">
+            <VisibleRange enabled="false">
+              <ZoomRange uom="mapinfo:length mi" minInclusive="true" maxInclusive="false">0 0</ZoomRange>
+            </VisibleRange>
+          </Visibility>
+          <DataSourceRef ref="id1" />
+        </FeatureLayer>
+        <FeatureLayer id="id7" name="边界" alias="边界" volatile="unknown">
+          <Visibility visible="true">
+            <VisibleRange enabled="false">
+              <ZoomRange uom="mapinfo:length mi" minInclusive="true" maxInclusive="false">0 0</ZoomRange>
+            </VisibleRange>
+          </Visibility>
+          <DataSourceRef ref="id2" />
+        </FeatureLayer>
+      </LayerList>
+      <MapLegendSet />
+    </MapDefinition>
+  </MapDefinitionSet>
+  <MapinfoApplicationData>
+    <MapXtremeWindows>
+      <MapToolsSet>
+        <MapTools ref="id4">
+          <BaseMapToolProperties>
+            <MapToolProperties>
+              <InfotipProperties>
+                <MapToolFilter name="MapInfo.Tools.MapToolsDefault.InfoTipLayers">
+                  <MapToolInitialFilter>
+                    <MapLayerTypeFilter types="drillDown grid vector raster seamless wms" />
+                  </MapToolInitialFilter>
+                  <LayerInclude refs="id5 id6 id7" />
+                  <MapToolFinalFilter>
+                    <MapLayerVisibilityFilter useVisible="true" useNotVisible="false" />
+                  </MapToolFinalFilter>
+                </MapToolFilter>
+              </InfotipProperties>
+              <SnapToNodeProperties>
+                <MapToolFilter name="MapInfo.Tools.MapToolsDefault.SnapLayers">
+                  <MapToolInitialFilter>
+                    <MapLayerTypeFilter types="vector" />
+                  </MapToolInitialFilter>
+                  <LayerInclude refs="id5 id6 id7" />
+                  <MapToolFinalFilter>
+                    <MapLayerVisibilityFilter useVisible="true" useNotVisible="false" />
+                  </MapToolFinalFilter>
+                </MapToolFilter>
+              </SnapToNodeProperties>
+            </MapToolProperties>
+          </BaseMapToolProperties>
+          <BaseInsertionToolProperties>
+            <InsertionToolProperties>
+              <MapToolFilter name="MapInfo.Tools.MapToolsDefault.InsertionLayers">
+                <MapToolInitialFilter>
+                  <MapLayerVisibilityFilter useVisible="false" useNotVisible="false" />
+                </MapToolInitialFilter>
+                <LayerExclude refs="id5 id6 id7" />
+                <MapToolFinalFilter>
+                  <MapLayerVisibilityFilter useVisible="true" useNotVisible="false" />
+                </MapToolFinalFilter>
+              </MapToolFilter>
+            </InsertionToolProperties>
+          </BaseInsertionToolProperties>
+          <BaseSelectionToolProperties>
+            <SelectionToolProperties>
+              <SelectionProperties>
+                <MapToolFilter name="MapInfo.Tools.MapToolsDefault.SelectLayers">
+                  <MapToolInitialFilter>
+                    <MapLayerTypeFilter types="vector" />
+                  </MapToolInitialFilter>
+                  <LayerInclude refs="id5 id6 id7" />
+                  <MapToolFinalFilter>
+                    <MapLayerVisibilityFilter useVisible="true" useNotVisible="false" />
+                  </MapToolFinalFilter>
+                </MapToolFilter>
+              </SelectionProperties>
+              <EditingProperties>
+                <MapToolFilter name="MapInfo.Tools.MapToolsDefault.EditLayers">
+                  <MapToolInitialFilter>
+                    <MapLayerVisibilityFilter useVisible="false" useNotVisible="false" />
+                  </MapToolInitialFilter>
+                  <LayerExclude refs="id5 id6 id7" />
+                  <MapToolFinalFilter>
+                    <MapLayerVisibilityFilter useVisible="true" useNotVisible="false" />
+                  </MapToolFinalFilter>
+                </MapToolFilter>
+              </EditingProperties>
+            </SelectionToolProperties>
+          </BaseSelectionToolProperties>
+        </MapTools>
+      </MapToolsSet>
+    </MapXtremeWindows>
+  </MapinfoApplicationData>
+</WorkSpace>
