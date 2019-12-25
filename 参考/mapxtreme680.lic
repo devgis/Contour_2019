@@ -1,0 +1,12 @@
+FEATURE GrandePreview unisw20 6.999 permanent uncounted HOSTID=ANY \
+ISSUER="TEAM TBE" TS_OK SIGN=E5BE55E214A0
+FEATURE MapXtremeDesktopIntl unisw20 6.0 permanent uncounted \
+HOSTID=ANY TS_OK SIGN=587047A2E876
+FEATURE MapXtremeDesktop unisw20 6.0 permanent uncounted HOSTID=ANY \
+TS_OK SIGN=4F1B9846086E
+FEATURE MapXtremeDesktopSDK unisw20 6.0 permanent uncounted \
+HOSTID=ANY TS_OK SIGN=380F26A8EE22
+FEATURE MapXtremeWebIntl unisw20 6.0 permanent uncounted HOSTID=ANY \
+TS_OK SIGN=DA9F322A1B06
+FEATURE MapXtremeWeb unisw20 6.0 permanent uncounted HOSTID=ANY TS_OK \
+SIGN=EF06227ECDA4
