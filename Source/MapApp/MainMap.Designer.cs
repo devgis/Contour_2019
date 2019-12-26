@@ -42,24 +42,26 @@
             this.mapToolBarButtonSelectRadius = new MapInfo.Windows.Controls.MapToolBarButton();
             this.toolBarEagle = new System.Windows.Forms.ToolBarButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.pEagle = new System.Windows.Forms.Panel();
-            this.mapControl2 = new MapInfo.Windows.Controls.MapControl();
+            this.tslScale = new System.Windows.Forms.ToolStripStatusLabel();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tslPos = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip1.SuspendLayout();
-            this.panel1.SuspendLayout();
-            this.pEagle.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // mapControl1
             // 
+            this.tableLayoutPanel1.SetColumnSpan(this.mapControl1, 3);
             this.mapControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mapControl1.IgnoreLostFocusEvent = false;
-            this.mapControl1.Location = new System.Drawing.Point(0, 0);
+            this.mapControl1.Location = new System.Drawing.Point(3, 33);
             this.mapControl1.Name = "mapControl1";
-            this.mapControl1.Size = new System.Drawing.Size(754, 342);
+            this.tableLayoutPanel1.SetRowSpan(this.mapControl1, 3);
+            this.mapControl1.Size = new System.Drawing.Size(776, 327);
             this.mapControl1.TabIndex = 0;
             this.mapControl1.Text = "mapControl1";
+            this.mapControl1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.mapControl1_MouseMove);
             this.mapControl1.Tools.LeftButtonTool = null;
             this.mapControl1.Tools.MiddleButtonTool = null;
             this.mapControl1.Tools.RightButtonTool = null;
@@ -78,14 +80,16 @@
             this.mapToolBarButtonSelectRect,
             this.mapToolBarButtonSelectRadius,
             this.toolBarEagle});
+            this.tableLayoutPanel1.SetColumnSpan(this.mapToolBar1, 3);
+            this.mapToolBar1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mapToolBar1.DropDownArrows = true;
-            this.mapToolBar1.Location = new System.Drawing.Point(0, 0);
+            this.mapToolBar1.Location = new System.Drawing.Point(3, 0);
             this.mapToolBar1.MapControl = this.mapControl1;
+            this.mapToolBar1.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
             this.mapToolBar1.Name = "mapToolBar1";
             this.mapToolBar1.ShowToolTips = true;
-            this.mapToolBar1.Size = new System.Drawing.Size(782, 28);
+            this.mapToolBar1.Size = new System.Drawing.Size(776, 28);
             this.mapToolBar1.TabIndex = 1;
-            this.mapToolBar1.ButtonClick += new System.Windows.Forms.ToolBarButtonClickEventHandler(this.mapToolBar1_ButtonClick);
             // 
             // mapToolBarButtonOpenTable
             // 
@@ -158,76 +162,72 @@
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1});
+            this.tslScale,
+            this.tslPos});
             this.statusStrip1.Location = new System.Drawing.Point(0, 387);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(782, 22);
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
             // 
-            // toolStripStatusLabel1
+            // tslScale
             // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(131, 17);
-            this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.ToolTipText = "地图缩放";
+            this.tslScale.Name = "tslScale";
+            this.tslScale.Size = new System.Drawing.Size(39, 17);
+            this.tslScale.Text = "缩放: ";
+            this.tslScale.ToolTipText = "地图缩放";
             // 
-            // panel1
+            // menuStrip1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel1.Controls.Add(this.pEagle);
-            this.panel1.Controls.Add(this.mapControl1);
-            this.panel1.Location = new System.Drawing.Point(12, 31);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(758, 346);
-            this.panel1.TabIndex = 3;
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(782, 24);
+            this.menuStrip1.TabIndex = 4;
+            this.menuStrip1.Text = "menuStrip1";
             // 
-            // pEagle
+            // tableLayoutPanel1
             // 
-            this.pEagle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.pEagle.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pEagle.Controls.Add(this.mapControl2);
-            this.pEagle.Location = new System.Drawing.Point(0, 118);
-            this.pEagle.Name = "pEagle";
-            this.pEagle.Size = new System.Drawing.Size(369, 224);
-            this.pEagle.TabIndex = 2;
+            this.tableLayoutPanel1.ColumnCount = 3;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Controls.Add(this.mapToolBar1, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.mapControl1, 0, 1);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 24);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 4;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(782, 363);
+            this.tableLayoutPanel1.TabIndex = 5;
             // 
-            // mapControl2
+            // tslPos
             // 
-            this.mapControl2.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.mapControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mapControl2.IgnoreLostFocusEvent = false;
-            this.mapControl2.Location = new System.Drawing.Point(0, 0);
-            this.mapControl2.Name = "mapControl2";
-            this.mapControl2.Size = new System.Drawing.Size(367, 222);
-            this.mapControl2.TabIndex = 1;
-            this.mapControl2.Text = "mapControl2";
-            this.mapControl2.MouseClick += new System.Windows.Forms.MouseEventHandler(this.mapControl2_MouseClick);
-            this.mapControl2.Tools.LeftButtonTool = null;
-            this.mapControl2.Tools.MiddleButtonTool = null;
-            this.mapControl2.Tools.RightButtonTool = null;
+            this.tslPos.Name = "tslPos";
+            this.tslPos.Size = new System.Drawing.Size(98, 17);
+            this.tslPos.Text = "位置: X:Na Y:Na";
             // 
             // MainMap
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(782, 409);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.mapToolBar1);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainMap";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "DEVGIS MapAPP";
+            this.Text = "MapAPP";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainMap_FormClosing);
             this.Load += new System.EventHandler(this.MainMap_Load);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.pEagle.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -248,11 +248,11 @@
         private MapInfo.Windows.Controls.MapToolBarButton mapToolBarButtonSelectRect;
         private MapInfo.Windows.Controls.MapToolBarButton mapToolBarButtonSelectRadius;
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
-        private System.Windows.Forms.Panel panel1;
-        private MapInfo.Windows.Controls.MapControl mapControl2;
-        private System.Windows.Forms.Panel pEagle;
+        private System.Windows.Forms.ToolStripStatusLabel tslScale;
         private System.Windows.Forms.ToolBarButton toolBarEagle;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel tslPos;
     }
 }
 

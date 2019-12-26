@@ -1,0 +1,10 @@
+D:\GitHub\Contour_2019\Source\MapApp\obj\Debug\MapApp.csprojAssemblyReference.cache
+D:\GitHub\Contour_2019\Source\MapApp\obj\Debug\Devgis.EagleEye.MainMap.resources
+D:\GitHub\Contour_2019\Source\MapApp\obj\Debug\DEVGIS.MapAPP.Properties.Resources.resources
+D:\GitHub\Contour_2019\Source\MapApp\obj\Debug\MapApp.csproj.GenerateResource.cache
+D:\GitHub\Contour_2019\Source\MapApp\obj\Debug\MapApp.csproj.CoreCompileInputs.cache
+D:\GitHub\Contour_2019\Source\Realease\MapAPP.exe.config
+D:\GitHub\Contour_2019\Source\Realease\MapAPP.exe
+D:\GitHub\Contour_2019\Source\Realease\MapAPP.pdb
+D:\GitHub\Contour_2019\Source\MapApp\obj\Debug\MapAPP.exe
+D:\GitHub\Contour_2019\Source\MapApp\obj\Debug\MapAPP.pdb
