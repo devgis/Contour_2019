@@ -8,3 +8,4 @@ D:\GitHub\Contour_2019\Source\Realease\MapAPP.exe
 D:\GitHub\Contour_2019\Source\Realease\MapAPP.pdb
 D:\GitHub\Contour_2019\Source\MapApp\obj\Debug\MapAPP.exe
 D:\GitHub\Contour_2019\Source\MapApp\obj\Debug\MapAPP.pdb
+D:\GitHub\Contour_2019\Source\MapApp\obj\Debug\MapApp.csproj.CopyComplete

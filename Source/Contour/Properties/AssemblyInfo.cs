@@ -5,13 +5,13 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("MouStudio")]
+[assembly: AssemblyTitle("Contour")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("MouStudio")]
-[assembly: AssemblyCopyright("Copyright ©  2009")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCompany("DEVGIS")]
+[assembly: AssemblyProduct("Contour")]
+[assembly: AssemblyCopyright("Copyright © DEVGIS 2009")]
+[assembly: AssemblyTrademark("DEVGIS")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 

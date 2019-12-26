@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DEVGIS.Contour
 {
-    class Cmou_ContourLine
+    public class Cmou_ContourLine
     {
         public Cmou_ContourLine(double d_ContourValue)
         {

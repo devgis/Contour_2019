@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace DEVGIS.Contour
 {
-    class C_ContourTrace
+    public class C_ContourTrace
     {
         //======= 构造函数，传递三角网信息 ====================================
         public C_ContourTrace(C_Trianglate trianglateIN)

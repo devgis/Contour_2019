@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Collections;
 
 namespace DEVGIS.Contour {
-    class C_Trianglate2 {
+    public class C_Trianglate2 {
         public C_Trianglate2(PointF[] arrDotsIN)
         {
             arrDots = arrDotsIN;

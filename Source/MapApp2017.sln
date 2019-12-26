@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MapApp", "MapApp\MapApp.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contour", "Contour\Contour.csproj", "{2B674353-5629-4DED-9927-FB86C9515D80}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{1D0CAE91-873F-4EB9-B7C6-733427D13A5E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{2B674353-5629-4DED-9927-FB86C9515D80}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2B674353-5629-4DED-9927-FB86C9515D80}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2B674353-5629-4DED-9927-FB86C9515D80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D0CAE91-873F-4EB9-B7C6-733427D13A5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D0CAE91-873F-4EB9-B7C6-733427D13A5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D0CAE91-873F-4EB9-B7C6-733427D13A5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D0CAE91-873F-4EB9-B7C6-733427D13A5E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

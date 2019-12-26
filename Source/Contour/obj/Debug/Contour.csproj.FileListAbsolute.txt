@@ -1,0 +1,9 @@
+D:\GitHub\Contour_2019\Source\Contour\bin\Debug\Contour.dll
+D:\GitHub\Contour_2019\Source\Contour\bin\Debug\Contour.pdb
+D:\GitHub\Contour_2019\Source\Contour\obj\Debug\Contour.csprojAssemblyReference.cache
+D:\GitHub\Contour_2019\Source\Contour\obj\Debug\DEVGIS.Contour.Form1.resources
+D:\GitHub\Contour_2019\Source\Contour\obj\Debug\DEVGIS.Contour.Properties.Resources.resources
+D:\GitHub\Contour_2019\Source\Contour\obj\Debug\Contour.csproj.GenerateResource.cache
+D:\GitHub\Contour_2019\Source\Contour\obj\Debug\Contour.csproj.CoreCompileInputs.cache
+D:\GitHub\Contour_2019\Source\Contour\obj\Debug\Contour.dll
+D:\GitHub\Contour_2019\Source\Contour\obj\Debug\Contour.pdb

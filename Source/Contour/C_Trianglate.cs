@@ -4,7 +4,7 @@ using System.Text;
 using System.Drawing;
 
 namespace DEVGIS.Contour {
-    class C_Trianglate {
+    public class C_Trianglate {
 
         public C_Trianglate(double[] dData_XIN, double[] dData_YIN, double[] dData_ZIN)
         {
