@@ -50,11 +50,11 @@
             this.tsmiExport = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiExit = new System.Windows.Forms.ToolStripMenuItem();
             this.数据ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiGenerateContour = new System.Windows.Forms.ToolStripMenuItem();
             this.帮助关于ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiHelper = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.tsmiGenerateContour = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -218,21 +218,21 @@
             // tsmiOpen
             // 
             this.tsmiOpen.Name = "tsmiOpen";
-            this.tsmiOpen.Size = new System.Drawing.Size(180, 22);
+            this.tsmiOpen.Size = new System.Drawing.Size(118, 22);
             this.tsmiOpen.Text = "打开(&O)";
             this.tsmiOpen.Click += new System.EventHandler(this.tsmiOpen_Click);
             // 
             // tsmiExport
             // 
             this.tsmiExport.Name = "tsmiExport";
-            this.tsmiExport.Size = new System.Drawing.Size(180, 22);
+            this.tsmiExport.Size = new System.Drawing.Size(118, 22);
             this.tsmiExport.Text = "导出(&X)";
             this.tsmiExport.Click += new System.EventHandler(this.tsmiExport_Click);
             // 
             // tsmiExit
             // 
             this.tsmiExit.Name = "tsmiExit";
-            this.tsmiExit.Size = new System.Drawing.Size(180, 22);
+            this.tsmiExit.Size = new System.Drawing.Size(118, 22);
             this.tsmiExit.Text = "退出(&E)";
             this.tsmiExit.Click += new System.EventHandler(this.tsmiExit_Click);
             // 
@@ -243,6 +243,13 @@
             this.数据ToolStripMenuItem.Name = "数据ToolStripMenuItem";
             this.数据ToolStripMenuItem.Size = new System.Drawing.Size(61, 21);
             this.数据ToolStripMenuItem.Text = "数据(&D)";
+            // 
+            // tsmiGenerateContour
+            // 
+            this.tsmiGenerateContour.Name = "tsmiGenerateContour";
+            this.tsmiGenerateContour.Size = new System.Drawing.Size(152, 22);
+            this.tsmiGenerateContour.Text = "生成等值面(&C)";
+            this.tsmiGenerateContour.Click += new System.EventHandler(this.tsmiGenerateContour_Click);
             // 
             // 帮助关于ToolStripMenuItem
             // 
@@ -256,14 +263,14 @@
             // tsmiHelper
             // 
             this.tsmiHelper.Name = "tsmiHelper";
-            this.tsmiHelper.Size = new System.Drawing.Size(180, 22);
+            this.tsmiHelper.Size = new System.Drawing.Size(117, 22);
             this.tsmiHelper.Text = "帮助(&H)";
             this.tsmiHelper.Click += new System.EventHandler(this.tsmiHelper_Click);
             // 
             // tsmiAbout
             // 
             this.tsmiAbout.Name = "tsmiAbout";
-            this.tsmiAbout.Size = new System.Drawing.Size(180, 22);
+            this.tsmiAbout.Size = new System.Drawing.Size(117, 22);
             this.tsmiAbout.Text = "关于(&A)";
             this.tsmiAbout.Click += new System.EventHandler(this.tsmiAbout_Click);
             // 
@@ -285,13 +292,6 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(782, 362);
             this.tableLayoutPanel1.TabIndex = 5;
-            // 
-            // tsmiGenerateContour
-            // 
-            this.tsmiGenerateContour.Name = "tsmiGenerateContour";
-            this.tsmiGenerateContour.Size = new System.Drawing.Size(180, 22);
-            this.tsmiGenerateContour.Text = "生成等值面(&C)";
-            this.tsmiGenerateContour.Click += new System.EventHandler(this.tsmiGenerateContour_Click);
             // 
             // MainMap
             // 

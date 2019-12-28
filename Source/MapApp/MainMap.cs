@@ -112,14 +112,14 @@ namespace DEVGIS.EagleEye
         {
             DPoint pt = new DPoint();
             mapControl1.Map.DisplayTransform.FromDisplay(e.Location, out pt);
-            tslPos.Text = $"位置: X:{pt.x.ToString("0.0000")} Y:{pt.y.ToString("0.0000")}";
+            tslPos.Text = string.Format("位置: X:{0} Y:{1}",pt.x.ToString("0.0000"),pt.y.ToString("0.0000"));
         }
 
         private void SaveData()
         {
             List<Cmou_ContourLine> lines = new List<Cmou_ContourLine>();
             SaveFileDialog sfd = new SaveFileDialog();
-            sfd.Filter = $"{fileext}文件|{fileext}";
+            sfd.Filter = string.Format("{0}文件|{0}",fileext);
             if (sfd.ShowDialog() == DialogResult.OK)
             {
                 try
@@ -137,7 +137,7 @@ namespace DEVGIS.EagleEye
         private void OpenData()
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = $"{fileext}文件|{fileext}";
+            ofd.Filter = string.Format("{0}文件|{0}",fileext);
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 try
@@ -273,7 +273,7 @@ namespace DEVGIS.EagleEye
 
         private void tsmiAbout_Click(object sender, EventArgs e)
         {
-            MessageHelper.ShowInfo($"{this.Text} {System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString()}");
+            MessageHelper.ShowInfo(string.Format("{0} {1}",this.Text,System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString()));
         }
         #endregion
     }
