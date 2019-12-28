@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace DEVGIS.EagleEye
+namespace DEVGIS.MapAPP
 {
     static class Program
     {

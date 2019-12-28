@@ -14,17 +14,19 @@ using System.IO;
 using DEVGIS.Contour;
 using DEVGIS.Common;
 using Newtonsoft.Json;
+using DEVGIS.MapAPP.Entities;
+using DEVGIS.MapAPP;
 
-namespace DEVGIS.EagleEye
+namespace DEVGIS.MapAPP
 {
     public partial class MainMap : Form
     {
-        double dMax_X = -999999999;
-        double dMax_Y = -999999999;
-        double dMin_X = 9999999999;
-        double dMin_Y = 9999999999;
-        double dMax_Z = -9999999999;
-        double dMin_Z = 9999999999;
+        double dMax_X = double.MinValue;
+        double dMax_Y = double.MinValue;
+        double dMin_X = double.MaxValue;
+        double dMin_Y = double.MaxValue;
+        double dMax_Z = double.MinValue;
+        double dMin_Z = double.MaxValue;
         const string fileext = "ctr";
 
         public MainMap()
@@ -153,9 +155,9 @@ namespace DEVGIS.EagleEye
             }
         }
 
-        private void DrowContour()
+        private void DrowContour(string LayerName, string PropertyName)
         {
-            var conTrace = new C_ContourTrace(GetData());
+            var conTrace = new C_ContourTrace(GetData(LayerName,PropertyName));
             conTrace.d_Max = dMax_Z;
             conTrace.d_Min = dMin_Z;
             conTrace.CTrace_ContourLineTrace();
@@ -225,7 +227,7 @@ namespace DEVGIS.EagleEye
             }
         }
 
-        private C_Trianglate GetData()
+        private C_Trianglate GetData(string LayerName,string PropertyName)
         {
             //要给以下变量赋值
             //double dMax_X = -999999999;
@@ -234,15 +236,94 @@ namespace DEVGIS.EagleEye
             //double dMin_Y = 9999999999;
             //double dMax_Z = -9999999999;
             //double dMin_Z = 9999999999;
+            FeatureLayer flLayer = mapControl1.Map.Layers["LayerName"] as FeatureLayer;
+            List<TData> datas = new List<TData>();
+            if (flLayer != null)
+            {
+                foreach (Feature feature in flLayer.Table)
+                {
+                    try
+                    {
+                        TData data = new TData();
+                        data.X = feature.Geometry.Centroid.x;
+                        data.Y = feature.Geometry.Centroid.y;
+                        data.Z = Convert.ToDouble(feature[PropertyName]);
+                        datas.Add(data);
+                    }
+                    catch(Exception ex)
+                    {
+                        Loger.WriteLog(ex);
+                    }
+                }
+            }
+            
             //
-            int iNum_Point = 100;
+            int iNum_Point = datas.Count;
             double[] dData_X = new double[iNum_Point];
             double[] dData_Y = new double[iNum_Point];
             double[] dData_Z = new double[iNum_Point];
+            for (int i = 0; i < iNum_Point; i++)
+            {
+                dData_X[i] = datas[i].X;
+                dData_Y[i] = datas[i].Y;
+                dData_Z[i] = datas[i].Z;
+
+                if (datas[i].X > dMax_X)
+                {
+                    dMax_X = datas[i].X;
+                }
+
+                if (datas[i].X < dMin_X)
+                {
+                    dMin_X = datas[i].X;
+                }
+
+                if (datas[i].Y > dMax_Y)
+                {
+                    dMax_Y = datas[i].Y;
+                }
+
+                if (datas[i].Y < dMin_Y)
+                {
+                    dMin_Y = datas[i].Y;
+                }
+
+                if (datas[i].Z > dMax_Z)
+                {
+                    dMax_Z = datas[i].Z;
+                }
+
+                if (datas[i].Z < dMin_Z)
+                {
+                    dMin_Z = datas[i].Z;
+                }
+            }
 
             C_Trianglate trianglate = new C_Trianglate(dData_X, dData_Y, dData_Z);
             int iNum_Tri = trianglate.Triangulate();
             return trianglate;
+        }
+
+        private List<LayerItem> GetLayerItems()
+        {
+            List<LayerItem> items = new List<LayerItem>();
+            foreach (var layer in mapControl1.Map.Layers)
+            {
+                if (layer is FeatureLayer)
+                {
+                    FeatureLayer flayer = layer as FeatureLayer;
+                    LayerItem item = new LayerItem();
+                    item.DisplayName = flayer.Alias;
+                    item.LayerName = flayer.Name;
+                    item.Propertys = new List<string>();
+                    foreach (var prop in flayer.CustomProperties.Keys)
+                    {
+
+                        item.Propertys.Add(prop.ToString());
+                    }
+                }
+            }
+            return items;
         }
 
         #region 菜单事件
@@ -263,7 +344,12 @@ namespace DEVGIS.EagleEye
 
         private void tsmiGenerateContour_Click(object sender, EventArgs e)
         {
-            DrowContour();
+            var layerinfos = GetLayerItems();
+            SelectLayer selectLayer = new SelectLayer(layerinfos);
+            if (selectLayer.ShowDialog() == DialogResult.OK)
+            {
+                DrowContour(selectLayer.LayerName, selectLayer.PropertyName);
+            }
         }
 
         private void tsmiHelper_Click(object sender, EventArgs e)

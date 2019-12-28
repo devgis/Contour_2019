@@ -1,4 +1,4 @@
-﻿namespace DEVGIS.EagleEye
+﻿namespace DEVGIS.MapAPP
 {
     partial class MainMap
     {
