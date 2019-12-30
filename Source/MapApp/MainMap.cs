@@ -146,6 +146,8 @@ namespace DEVGIS.MapAPP
             MapWorkSpaceLoader mwsLoader = new MapWorkSpaceLoader(MapPath);
             mapControl1.Map.Load(mwsLoader);
             CreateTableLayer();//加载用于绘制等值线的图
+
+            mapControl1.Tools.LeftButtonTool = "Pan";
         }
 
         private void CreateTableLayer()
