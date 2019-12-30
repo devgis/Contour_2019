@@ -36,6 +36,7 @@ namespace DEVGIS.MapAPP
             Map_ViewChangedEvent(this, null);
         }
 
+        #region 菜单事件
         void Map_ViewChangedEvent(object sender, MapInfo.Mapping.ViewChangedEventArgs e)
         {
             mapControl1.Map.Zoom = new MapInfo.Geometry.Distance(
@@ -71,12 +72,78 @@ namespace DEVGIS.MapAPP
             this.LoadMap();
         }
 
+        private void tsmiOpen_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                OpenData();
+            }
+            catch (Exception ex)
+            {
+                Loger.WriteLog(ex);
+                MessageHelper.ShowInfo("出现未知异常:" + ex.Message);
+            }
+        }
+
+        private void tsmiExport_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                SaveData();
+            }
+            catch (Exception ex)
+            {
+                Loger.WriteLog(ex);
+                MessageHelper.ShowInfo("出现未知异常:" + ex.Message);
+            }
+        }
+
+        private void tsmiExit_Click(object sender, EventArgs e)
+        {
+            Application.ExitThread();
+        }
+
+        private void tsmiGenerateContour_Click(object sender, EventArgs e)
+        {
+            var layerinfos = GetLayerItems();
+            SelectLayer selectLayer = new SelectLayer(layerinfos);
+            if (selectLayer.ShowDialog() == DialogResult.OK)
+            {
+                DrowContour(selectLayer.LayerName, selectLayer.PropertyName);
+            }
+        }
+
+        private void tsmiHelper_Click(object sender, EventArgs e)
+        {
+            MessageHelper.ShowInfo("暂无帮助！");
+        }
+
+        private void tsmiAbout_Click(object sender, EventArgs e)
+        {
+            MessageHelper.ShowInfo(string.Format("{0} {1}",this.Text,System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString()));
+        }
+
+        private void tsmiAverage_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                CalculateAverage();
+            }
+            catch(Exception ex)
+            {
+                Loger.WriteLog(ex);
+                MessageHelper.ShowInfo("出现未知异常:"+ ex.Message);
+            }
+        }
+        #endregion
+
+        #region 私有方法
         private void LoadMap()
         {
             string MapPath = Path.Combine(Application.StartupPath, @"Data\map.mws");
             MapWorkSpaceLoader mwsLoader = new MapWorkSpaceLoader(MapPath);
             mapControl1.Map.Load(mwsLoader);
-            
+
         }
 
         private void loadEagleLayer()
@@ -114,21 +181,21 @@ namespace DEVGIS.MapAPP
         {
             DPoint pt = new DPoint();
             mapControl1.Map.DisplayTransform.FromDisplay(e.Location, out pt);
-            tslPos.Text = string.Format("位置: X:{0} Y:{1}",pt.x.ToString("0.0000"),pt.y.ToString("0.0000"));
+            tslPos.Text = string.Format("位置: X:{0} Y:{1}", pt.x.ToString("0.0000"), pt.y.ToString("0.0000"));
         }
 
         private void SaveData()
         {
             List<Cmou_ContourLine> lines = new List<Cmou_ContourLine>();
             SaveFileDialog sfd = new SaveFileDialog();
-            sfd.Filter = string.Format("{0}文件|{0}",fileext);
+            sfd.Filter = string.Format("{0}文件|{0}", fileext);
             if (sfd.ShowDialog() == DialogResult.OK)
             {
                 try
                 {
-                    File.WriteAllText(sfd.FileName,JsonConvert.SerializeObject(lines));
+                    File.WriteAllText(sfd.FileName, JsonConvert.SerializeObject(lines));
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     Loger.WriteLog(ex);
                     MessageHelper.ShowError("保存数据出错：" + ex.Message);
@@ -139,12 +206,12 @@ namespace DEVGIS.MapAPP
         private void OpenData()
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = string.Format("{0}文件|{0}",fileext);
+            ofd.Filter = string.Format("{0}文件|{0}", fileext);
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 try
                 {
-                    List<Cmou_ContourLine> lines =JsonConvert.DeserializeObject<List<Cmou_ContourLine>>(File.ReadAllText(ofd.FileName));
+                    List<Cmou_ContourLine> lines = JsonConvert.DeserializeObject<List<Cmou_ContourLine>>(File.ReadAllText(ofd.FileName));
                     DrawContour(lines);
                 }
                 catch (Exception ex)
@@ -157,7 +224,7 @@ namespace DEVGIS.MapAPP
 
         private void DrowContour(string LayerName, string PropertyName)
         {
-            var conTrace = new C_ContourTrace(GetData(LayerName,PropertyName));
+            var conTrace = new C_ContourTrace(GetData(LayerName, PropertyName));
             conTrace.d_Max = dMax_Z;
             conTrace.d_Min = dMin_Z;
             conTrace.CTrace_ContourLineTrace();
@@ -227,7 +294,7 @@ namespace DEVGIS.MapAPP
             }
         }
 
-        private C_Trianglate GetData(string LayerName,string PropertyName)
+        private C_Trianglate GetData(string LayerName, string PropertyName)
         {
             //要给以下变量赋值
             //double dMax_X = -999999999;
@@ -250,13 +317,13 @@ namespace DEVGIS.MapAPP
                         data.Z = Convert.ToDouble(feature[PropertyName]);
                         datas.Add(data);
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         Loger.WriteLog(ex);
                     }
                 }
             }
-            
+
             //
             int iNum_Point = datas.Count;
             double[] dData_X = new double[iNum_Point];
@@ -326,40 +393,9 @@ namespace DEVGIS.MapAPP
             return items;
         }
 
-        #region 菜单事件
-        private void tsmiOpen_Click(object sender, EventArgs e)
+        private void CalculateAverage()
         {
-            OpenData();
-        }
 
-        private void tsmiExport_Click(object sender, EventArgs e)
-        {
-            SaveData();
-        }
-
-        private void tsmiExit_Click(object sender, EventArgs e)
-        {
-            Application.ExitThread();
-        }
-
-        private void tsmiGenerateContour_Click(object sender, EventArgs e)
-        {
-            var layerinfos = GetLayerItems();
-            SelectLayer selectLayer = new SelectLayer(layerinfos);
-            if (selectLayer.ShowDialog() == DialogResult.OK)
-            {
-                DrowContour(selectLayer.LayerName, selectLayer.PropertyName);
-            }
-        }
-
-        private void tsmiHelper_Click(object sender, EventArgs e)
-        {
-            MessageHelper.ShowInfo("暂无帮助！");
-        }
-
-        private void tsmiAbout_Click(object sender, EventArgs e)
-        {
-            MessageHelper.ShowInfo(string.Format("{0} {1}",this.Text,System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString()));
         }
         #endregion
     }

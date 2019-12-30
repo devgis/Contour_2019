@@ -55,6 +55,7 @@
             this.tsmiHelper = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tsmiAverage = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -239,7 +240,8 @@
             // 数据ToolStripMenuItem
             // 
             this.数据ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiGenerateContour});
+            this.tsmiGenerateContour,
+            this.tsmiAverage});
             this.数据ToolStripMenuItem.Name = "数据ToolStripMenuItem";
             this.数据ToolStripMenuItem.Size = new System.Drawing.Size(61, 21);
             this.数据ToolStripMenuItem.Text = "数据(&D)";
@@ -247,7 +249,7 @@
             // tsmiGenerateContour
             // 
             this.tsmiGenerateContour.Name = "tsmiGenerateContour";
-            this.tsmiGenerateContour.Size = new System.Drawing.Size(152, 22);
+            this.tsmiGenerateContour.Size = new System.Drawing.Size(180, 22);
             this.tsmiGenerateContour.Text = "生成等值面(&C)";
             this.tsmiGenerateContour.Click += new System.EventHandler(this.tsmiGenerateContour_Click);
             // 
@@ -292,6 +294,13 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(782, 362);
             this.tableLayoutPanel1.TabIndex = 5;
+            // 
+            // tsmiAverage
+            // 
+            this.tsmiAverage.Name = "tsmiAverage";
+            this.tsmiAverage.Size = new System.Drawing.Size(180, 22);
+            this.tsmiAverage.Text = "计算平均值(&A)";
+            this.tsmiAverage.Click += new System.EventHandler(this.tsmiAverage_Click);
             // 
             // MainMap
             // 
@@ -347,6 +356,7 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiHelper;
         private System.Windows.Forms.ToolStripMenuItem tsmiAbout;
         private System.Windows.Forms.ToolStripMenuItem tsmiGenerateContour;
+        private System.Windows.Forms.ToolStripMenuItem tsmiAverage;
     }
 }
 
