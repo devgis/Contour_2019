@@ -8,3 +8,4 @@ D:\Work\GitHub\Contour_2019\Source\Common\bin\Debug\Common.dll
 D:\Work\GitHub\Contour_2019\Source\Common\bin\Debug\Common.pdb
 D:\Work\GitHub\Contour_2019\Source\Common\obj\Debug\Common.dll
 D:\Work\GitHub\Contour_2019\Source\Common\obj\Debug\Common.pdb
+D:\Work\GitHub\Contour_2019\Source\Common\obj\Debug\Common.csprojResolveAssemblyReference.cache

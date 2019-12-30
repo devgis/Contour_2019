@@ -28,6 +28,8 @@ namespace DEVGIS.MapAPP
         double dMax_Z = double.MinValue;
         double dMin_Z = double.MaxValue;
         const string fileext = "ctr";
+        const string layername = "ContourLayer";
+        FeatureLayer flContourLayer = null;
 
         public MainMap()
         {
@@ -143,38 +145,65 @@ namespace DEVGIS.MapAPP
             string MapPath = Path.Combine(Application.StartupPath, @"Data\map.mws");
             MapWorkSpaceLoader mwsLoader = new MapWorkSpaceLoader(MapPath);
             mapControl1.Map.Load(mwsLoader);
+            CreateTableLayer();//加载用于绘制等值线的图
         }
 
-        private void loadEagleLayer()
+        private void CreateTableLayer()
         {
-            //TableInfoMemTable ti = new TableInfoMemTable("EagleEyeTemp");
-            //ti.Temporary = true;
-            //Column column;
-            //column = new GeometryColumn(mapControl2.Map.GetDisplayCoordSys());
-            //column.Alias = "MI_Geometry ";
-            //column.DataType = MIDbType.FeatureGeometry;
-            //ti.Columns.Add(column);
+            TableInfoMemTable ti = new TableInfoMemTable("ContourLayerTemp");
+            ti.Temporary = true;
+            ti.Columns.Add(ColumnFactory.CreateFeatureGeometryColumn(mapControl1.Map.GetDisplayCoordSys()));
+            ti.Columns.Add(ColumnFactory.CreateStyleColumn());
+            ti.Columns.Add(ColumnFactory.CreateStringColumn("CValue", 100));
 
-            //column = new Column();
-            //column.Alias = "MI_Style ";
-            //column.DataType = MIDbType.Style;
-            //ti.Columns.Add(column);
-            //Table table;
-            //try
-            //{
-            //    table = Session.Current.Catalog.CreateTable(ti);
+            Table table;
+            try
+            {
+                table = Session.Current.Catalog.CreateTable(ti);
 
-            //}
-            //catch (Exception ex)
-            //{
-            //    table = Session.Current.Catalog.GetTable("EagleEyeTemp");
-            //}
-            //if (mapControl2.Map.Layers["MyEagleEye"] != null)
-            //    mapControl2.Map.Layers.Remove(eagleEye);
-            //eagleEye = new FeatureLayer(table, "EagleEye ", "MyEagleEye");
-            //mapControl2.Map.Layers.Insert(0, eagleEye);
-            //mapControl1.Refresh();
+            }
+            catch (Exception ex)
+            {
+                Loger.WriteLog(ex);
+                table = Session.Current.Catalog.GetTable("ContourLayerTemp");
+            }
+
+            flContourLayer = new FeatureLayer(table, "ContourLayer ", "ContourLayer");
+
+            //标签图层
+            LabelLayer lbLayer = new LabelLayer();
+            LabelSource source = new LabelSource(table);
+            source.DefaultLabelProperties.Caption = "CValue";
+            source.DefaultLabelProperties.Style.Font.ForeColor = System.Drawing.Color.Blue;   //字体颜色
+            source.DefaultLabelProperties.Style.Font.BackColor =System.Drawing.Color.PowderBlue ;   //字体背景
+            source.DefaultLabelProperties.Style.Font.TextEffect = MapInfo.Styles.TextEffect.Box;  //边缘效果
+            source.DefaultLabelProperties.Style.Font.FontWeight = MapInfo.Styles.FontWeight.Bold; //粗体
+            source.DefaultLabelProperties.Layout.Alignment = MapInfo.Text.Alignment.CenterRight;  //相对位置
+            source.DefaultLabelProperties.Layout.Offset = 2;
+            lbLayer.Sources.Append(source);
+
+            mapControl1.Map.Layers.Insert(0, flContourLayer);
+            mapControl1.Map.Layers.Insert(1, lbLayer);
+            mapControl1.Refresh();
         }
+
+        public void ClearTableLayer()
+        {
+            SearchInfo si = MapInfo.Data.SearchInfoFactory.SearchWhere("");
+            IResultSetFeatureCollection ifs;
+            MapInfo.Data.Table table=flContourLayer.Table;
+            if (table != null) //Table exists close it
+            {
+                si = MapInfo.Data.SearchInfoFactory.SearchWhere("1==1");
+                ifs = MapInfo.Engine.Session.Current.Catalog.Search(table, si);
+                foreach (Feature ft in ifs)
+                {
+                    table.DeleteFeature(ft);                           //删除所有该图层上的图元
+                }
+
+            }
+        }
+
 
         private void mapControl1_MouseMove(object sender, MouseEventArgs e)
         {
@@ -237,60 +266,39 @@ namespace DEVGIS.MapAPP
         private void DrawContour(List<Cmou_ContourLine> lines)
         {
             //先清空原有数据
-
-            PointF p1 = new PointF(0, 0);
-            PointF p2 = new PointF(0, 0);
-            Cmou_Point conP1 = new Cmou_Point();
-            Cmou_Point conP2 = new Cmou_Point();
+            ClearTableLayer();
             foreach (Cmou_ContourLine conLine in lines)
             {
-                //Cmou_ContourLine conLine = conTrace.list_ContourLine[0];
-                if (conLine.conType == ContourLineType.Opened)
+                List<DPoint> dPoints = new List<DPoint>();
+                for (int iP = 0; iP < conLine.list_Point.Count; iP++)
                 {
-                    for (int iP = 0; iP < conLine.list_Point.Count; iP++)
-                    {
-                        if (iP == 0)
-                        {
-                            conP1 = conLine.list_Point[iP];
-                            p1.X = (float)conP1.X;
-                            p1.Y = (float)conP1.Y;
-                        }
-                        else
-                        {
-                            conP2 = conLine.list_Point[iP];
-                            p2.X = (float)conP2.X;
-                            p2.Y = (float)conP2.Y;
-                            //g.DrawLine(Pens.Black, p1, p2);
-                            p1 = p2;
-                        }
-                    }
+                    dPoints.Add(new DPoint(conLine.list_Point[iP].X, conLine.list_Point[iP].Y));
                 }
-                else
+                if (conLine.conType == ContourLineType.Closed)
                 {
-                    for (int iP = 0; iP < conLine.list_Point.Count; iP++)
-                    {
-                        if (iP == 0)
-                        {
-                            conP1 = conLine.list_Point[iP];
-                            p1.X = (float)conP1.X;
-                            p1.Y = (float)conP1.Y;
-                        }
-                        else
-                        {
-                            conP2 = conLine.list_Point[iP];
-                            p2.X = (float)conP2.X;
-                            p2.Y = (float)conP2.Y;
-                            //g.DrawLine(Pens.Black, p1, p2);
-                            p1 = p2;
-                        }
-                    }
-
-                    conP1 = conLine.list_Point[0];
-                    p1.X = (float)conP1.X;
-                    p1.Y = (float)conP1.Y;
-                    //g.DrawLine(Pens.Black, p2, p1);
+                    dPoints.Add(new DPoint(conLine.list_Point[0].X, conLine.list_Point[0].Y));
                 }
+                DrawSegment(dPoints, conLine.d_Value.ToString());
             }
+        }
+
+        private void DrawSegment(List<DPoint> DPoints,string Value)
+        {
+            if (DPoints == null || DPoints.Count < 2)
+            {
+                return;
+            }
+            MultiCurve multiCurve = new MultiCurve(flContourLayer.CoordSys, CurveSegmentType.Linear, DPoints.ToArray());
+            
+
+            //FeatureGeometry pgLine = MultiCurve.CreateLine(flContourLayer.CoordSys, new DPoint(p1.X,p1.Y), new DPoint(p2.X,p2.Y));
+            MapInfo.Styles.SimpleLineStyle slsLine = new MapInfo.Styles.SimpleLineStyle(new LineWidth(3, LineWidthUnit.Pixel), 2, System.Drawing.Color.OrangeRed);
+            MapInfo.Styles.CompositeStyle csLine = new MapInfo.Styles.CompositeStyle(slsLine);
+            MapInfo.Data.Feature ptLine = new MapInfo.Data.Feature(flContourLayer.Table.TableInfo.Columns);
+            ptLine.Geometry = multiCurve;
+            ptLine.Style = csLine;
+            ptLine["CValue"] = Value;
+            flContourLayer.Table.InsertFeature(ptLine);
         }
 
         private C_Trianglate GetData(string LayerName, string PropertyName)
