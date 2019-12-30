@@ -143,7 +143,6 @@ namespace DEVGIS.MapAPP
             string MapPath = Path.Combine(Application.StartupPath, @"Data\map.mws");
             MapWorkSpaceLoader mwsLoader = new MapWorkSpaceLoader(MapPath);
             mapControl1.Map.Load(mwsLoader);
-
         }
 
         private void loadEagleLayer()
