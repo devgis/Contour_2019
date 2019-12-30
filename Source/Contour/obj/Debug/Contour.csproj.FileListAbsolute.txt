@@ -13,3 +13,4 @@ D:\Work\GitHub\Contour_2019\Source\Contour\obj\Debug\DEVGIS.Contour.Properties.R
 D:\Work\GitHub\Contour_2019\Source\Contour\obj\Debug\Contour.csproj.GenerateResource.Cache
 D:\Work\GitHub\Contour_2019\Source\Contour\obj\Debug\Contour.dll
 D:\Work\GitHub\Contour_2019\Source\Contour\obj\Debug\Contour.pdb
+D:\GitHub\Contour_2019\Source\Contour\obj\Debug\Contour.csprojAssemblyReference.cache
