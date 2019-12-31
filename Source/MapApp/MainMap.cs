@@ -380,6 +380,45 @@ namespace DEVGIS.MapAPP
             return trianglate;
         }
 
+        private List<LayerItem> GetLayerItems(bool numeric=false)
+        {
+            List<LayerItem> items = new List<LayerItem>();
+            foreach (var layer in mapControl1.Map.Layers)
+            {
+                if (layer is FeatureLayer)
+                {
+                    FeatureLayer flayer = layer as FeatureLayer;
+                    LayerItem item = new LayerItem();
+                    item.DisplayName = flayer.Alias;
+                    item.LayerName = flayer.Name;
+                    item.Propertys = new List<string>();
+                    if (numeric)
+                    {
+                        foreach (object prop in flayer.CustomProperties.Keys)
+                        {
+                            if(flayer.Table.TableInfo.Columns[prop.ToString()].DataType==MIDbType.dBaseDecimal
+                                || flayer.Table.TableInfo.Columns[prop.ToString()].DataType == MIDbType.Double
+                                || flayer.Table.TableInfo.Columns[prop.ToString()].DataType == MIDbType.Int
+                                || flayer.Table.TableInfo.Columns[prop.ToString()].DataType == MIDbType.SmallInt)
+                            {
+                                item.Propertys.Add(prop.ToString());
+                            }
+                        }
+                    }
+                    else
+                    {
+                        foreach (var prop in flayer.CustomProperties.Keys)
+                        {
+
+                            item.Propertys.Add(prop.ToString());
+                        }
+                    }
+                    
+                }
+            }
+            return items;
+        }
+
         private List<LayerItem> GetLayerItems()
         {
             List<LayerItem> items = new List<LayerItem>();
@@ -404,7 +443,32 @@ namespace DEVGIS.MapAPP
 
         private void CalculateAverage()
         {
-
+            var layerinfos = GetLayerItems(true);
+            SelectProperties selectLayer = new SelectProperties(layerinfos);
+            if (selectLayer.ShowDialog() == DialogResult.OK)
+            {
+                FeatureLayer flavglayer = mapControl1.Map.Layers[selectLayer.LayerName] as FeatureLayer;
+                Dictionary<string, double> dictValues = new Dictionary<string, double>();
+                foreach (string key in selectLayer.PropertyNames)
+                {
+                    int count = 0;
+                    dictValues.Add(key, 0);
+                    foreach (Feature ft in flavglayer.Table)
+                    {
+                        count++;
+                        dictValues[key] += Convert.ToDouble(ft["key"]); //求和
+                    }
+                    dictValues[key] = dictValues[key] / count;//求平均数
+                }
+                StringBuilder sb = new StringBuilder();
+                foreach (string key in dictValues.Keys)
+                {
+                    sb.AppendLine(string.Format("属性[{0}] 平均值{1}", key, dictValues[key]));
+                    MessageHelper.ShowInfo(sb.ToString());
+                    return;
+                }
+                MessageHelper.ShowError("计算项！");
+            }
         }
         #endregion
     }

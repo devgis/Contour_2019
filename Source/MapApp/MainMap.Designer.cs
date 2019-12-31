@@ -51,11 +51,11 @@
             this.tsmiExit = new System.Windows.Forms.ToolStripMenuItem();
             this.数据ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiGenerateContour = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiAverage = new System.Windows.Forms.ToolStripMenuItem();
             this.帮助关于ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiHelper = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.tsmiAverage = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -253,6 +253,13 @@
             this.tsmiGenerateContour.Text = "生成等值面(&C)";
             this.tsmiGenerateContour.Click += new System.EventHandler(this.tsmiGenerateContour_Click);
             // 
+            // tsmiAverage
+            // 
+            this.tsmiAverage.Name = "tsmiAverage";
+            this.tsmiAverage.Size = new System.Drawing.Size(180, 22);
+            this.tsmiAverage.Text = "计算平均值(&A)";
+            this.tsmiAverage.Click += new System.EventHandler(this.tsmiAverage_Click);
+            // 
             // 帮助关于ToolStripMenuItem
             // 
             this.帮助关于ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -294,13 +301,6 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(782, 362);
             this.tableLayoutPanel1.TabIndex = 5;
-            // 
-            // tsmiAverage
-            // 
-            this.tsmiAverage.Name = "tsmiAverage";
-            this.tsmiAverage.Size = new System.Drawing.Size(180, 22);
-            this.tsmiAverage.Text = "计算平均值(&A)";
-            this.tsmiAverage.Click += new System.EventHandler(this.tsmiAverage_Click);
             // 
             // MainMap
             // 
