@@ -33,9 +33,9 @@ namespace DEVGIS.Contour {
             {                
                 if (conTrace != null && conTrace.list_ContourLine.Count > 0)
                 {
-                    //------- 等值线填充 -------   
-                    if (isFill)
-                        conTrace.CTrace_Fill(g);
+                    ////------- 等值线填充 -------   
+                    //if (isFill)
+                    //    conTrace.CTrace_Fill(g);
 
                     //------- 边标记 -------
                     if(isMarkEdge)

@@ -30,6 +30,7 @@ namespace DEVGIS.MapAPP
         const string fileext = "ctr";
         const string layername = "ContourLayer";
         FeatureLayer flContourLayer = null;
+        private List<Cmou_ContourLine> currentData = null;
 
         public MainMap()
         {
@@ -79,6 +80,7 @@ namespace DEVGIS.MapAPP
             try
             {
                 OpenData();
+                MessageHelper.ShowInfo("加载成功！");
             }
             catch (Exception ex)
             {
@@ -91,7 +93,16 @@ namespace DEVGIS.MapAPP
         {
             try
             {
-                SaveData();
+                if (currentData != null && currentData.Count > 0)
+                {
+                    SaveData();
+                    MessageHelper.ShowInfo("导出成功！");
+                }
+                else
+                {
+                    MessageHelper.ShowError("无可用数据导出,请先生成!");
+                }
+                
             }
             catch (Exception ex)
             {
@@ -216,14 +227,18 @@ namespace DEVGIS.MapAPP
 
         private void SaveData()
         {
-            List<Cmou_ContourLine> lines = new List<Cmou_ContourLine>();
             SaveFileDialog sfd = new SaveFileDialog();
-            sfd.Filter = string.Format("{0}文件|{0}", fileext);
+            sfd.Filter = string.Format("{0}文件|*.{0}", fileext);
             if (sfd.ShowDialog() == DialogResult.OK)
             {
                 try
                 {
-                    File.WriteAllText(sfd.FileName, JsonConvert.SerializeObject(lines));
+                    string filename = sfd.FileName;
+                    if (!filename.EndsWith("." + fileext))
+                    {
+                        filename += "." + fileext;
+                    }
+                    File.WriteAllText(filename, JsonConvert.SerializeObject(currentData));
                 }
                 catch (Exception ex)
                 {
@@ -236,7 +251,7 @@ namespace DEVGIS.MapAPP
         private void OpenData()
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Filter = string.Format("{0}文件|{0}", fileext);
+            ofd.Filter = string.Format("{0}文件|*.{0}", fileext);
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 try
@@ -262,7 +277,8 @@ namespace DEVGIS.MapAPP
             PointF p2 = new PointF(0, 0);
             Cmou_Point conP1 = new Cmou_Point();
             Cmou_Point conP2 = new Cmou_Point();
-            DrawContour(conTrace.list_ContourLine);
+            currentData = conTrace.list_ContourLine;
+            DrawContour(currentData);
         }
 
         private void DrawContour(List<Cmou_ContourLine> lines)
@@ -291,10 +307,8 @@ namespace DEVGIS.MapAPP
                 return;
             }
             MultiCurve multiCurve = new MultiCurve(flContourLayer.CoordSys, CurveSegmentType.Linear, DPoints.ToArray());
-            
-
             //FeatureGeometry pgLine = MultiCurve.CreateLine(flContourLayer.CoordSys, new DPoint(p1.X,p1.Y), new DPoint(p2.X,p2.Y));
-            MapInfo.Styles.SimpleLineStyle slsLine = new MapInfo.Styles.SimpleLineStyle(new LineWidth(3, LineWidthUnit.Pixel), 2, System.Drawing.Color.OrangeRed);
+            MapInfo.Styles.SimpleLineStyle slsLine = new MapInfo.Styles.SimpleLineStyle(new LineWidth(1, LineWidthUnit.Pixel), 2, System.Drawing.Color.OrangeRed);
             MapInfo.Styles.CompositeStyle csLine = new MapInfo.Styles.CompositeStyle(slsLine);
             MapInfo.Data.Feature ptLine = new MapInfo.Data.Feature(flContourLayer.Table.TableInfo.Columns);
             ptLine.Geometry = multiCurve;

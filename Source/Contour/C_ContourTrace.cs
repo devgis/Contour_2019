@@ -18,12 +18,12 @@ namespace DEVGIS.Contour
         }
 
         //------- 相关属性操作 -------
-        int    iNum_ContourLine = 100; // 等值线的数目
+        int    iNum_ContourLine = 20; // 等值线的数目
         public double d_Max;                 // 等值线最大值
         public double d_Min;                 // 等值线最小值
         double[] dData_CLineValue;    // 等值线具体值构成的数组
-        // 等值线对应的颜色
-        List<System.Drawing.Color> list_Color = new List<System.Drawing.Color>();
+        //// 等值线对应的颜色
+        //List<System.Drawing.Color> list_Color = new List<System.Drawing.Color>();
 
         C_Trianglate trianglate = null; // 三角网信息
         public C_Triangle[] triangle;//= new C_Triangle[5000];
@@ -209,20 +209,20 @@ namespace DEVGIS.Contour
         // double[]  ------------------等值线具体数值构成的数组
         private void CTrace_ContourLineCal()
         {
-            list_Color.Clear();
-            int iR = 20;
-            int iG = 10;
-            int iB = 250;
-            System.Drawing.Color temp_C;
+            //list_Color.Clear();
+            //int iR = 20;
+            //int iG = 10;
+            //int iB = 250;
+            //System.Drawing.Color temp_C;
 
-            dData_CLineValue = new double[iNum_ContourLine+1];
+            dData_CLineValue = new double[iNum_ContourLine + 1];
             for (int i = 0; i <= iNum_ContourLine; i++)
             {
                 dData_CLineValue[i] = (d_Max - d_Min) / (double)iNum_ContourLine * (double)i + d_Min;
 
-                temp_C = new System.Drawing.Color();
-                temp_C = System.Drawing.Color.FromArgb(iR + i * 20, iG + i * 15, iB - i * 10);  
-                list_Color.Add(temp_C);
+                //temp_C = new System.Drawing.Color();
+                //temp_C = System.Drawing.Color.FromArgb(iR + i * 20, iG + i * 15, iB - i * 10);
+                //list_Color.Add(temp_C);
             }
         }
 
@@ -564,164 +564,164 @@ namespace DEVGIS.Contour
         List<System.Drawing.PointF> list_Pss = new List<System.Drawing.PointF>();
         System.Drawing.PointF[] ps = null;
         System.Drawing.PointF p;
-        public void CTrace_Fill(System.Drawing.Graphics g)
-        {
-            List<Cmou_Point> list_ConPoint = new List<Cmou_Point>();
-            foreach (Cmou_Triangle temp_Tri in list_TriTotal)
-            {
-                // 找出当前三角形中所有的等值点
-                list_ConPoint.Clear();
-                foreach (int indexEdge in temp_Tri.iEdgeIndex)
-                {
-                    foreach (Cmou_ContourLine temp_ConLine in list_ContourLine)
-                    {
-                    //Cmou_ContourLine temp_ConLine = list_ContourLine[0];
-                        foreach (Cmou_Point temp_Point in temp_ConLine.list_Point)
-                        {
-                            if (temp_Point.list_ID_Edge[0] == indexEdge)
-                            {
-                                list_ConPoint.Add(temp_Point); 
-                            }
-                            if (temp_Point.list_ID_Edge[0] ==-1)
-                            {
-                                MessageBox.Show(temp_Tri.ID.ToString());
-                            }
-                        }
-                    }
-                }
+        //public void CTrace_Fill(System.Drawing.Graphics g)
+        //{
+        //    List<Cmou_Point> list_ConPoint = new List<Cmou_Point>();
+        //    foreach (Cmou_Triangle temp_Tri in list_TriTotal)
+        //    {
+        //        // 找出当前三角形中所有的等值点
+        //        list_ConPoint.Clear();
+        //        foreach (int indexEdge in temp_Tri.iEdgeIndex)
+        //        {
+        //            foreach (Cmou_ContourLine temp_ConLine in list_ContourLine)
+        //            {
+        //            //Cmou_ContourLine temp_ConLine = list_ContourLine[0];
+        //                foreach (Cmou_Point temp_Point in temp_ConLine.list_Point)
+        //                {
+        //                    if (temp_Point.list_ID_Edge[0] == indexEdge)
+        //                    {
+        //                        list_ConPoint.Add(temp_Point); 
+        //                    }
+        //                    if (temp_Point.list_ID_Edge[0] ==-1)
+        //                    {
+        //                        MessageBox.Show(temp_Tri.ID.ToString());
+        //                    }
+        //                }
+        //            }
+        //        }
 
-                // 填充
-                if (list_ConPoint.Count > 0)
-                {
-                    foreach (int indexPoint in temp_Tri.iPointIndex)
-                    {
-                        list_ConPoint.Add(list_Point[indexPoint]);
-                    }
-                    // 从小到大排序
-                    for (int iP = 0; iP < list_ConPoint.Count; iP++)
-                    {
-                        for (int iP2 = iP; iP2 < list_ConPoint.Count; iP2++)
-                        {
-                            Cmou_Point temp_P = null;
-                            if (list_ConPoint[iP].V > list_ConPoint[iP2].V)
-                            {
-                                temp_P = list_ConPoint[iP2];
-                                list_ConPoint.RemoveAt(iP2);
-                                list_ConPoint.Insert(iP2, list_ConPoint[iP]);
-                                list_ConPoint[iP] = temp_P;
-                            }
-                        }
-                    }
+        //        // 填充
+        //        if (list_ConPoint.Count > 0)
+        //        {
+        //            foreach (int indexPoint in temp_Tri.iPointIndex)
+        //            {
+        //                list_ConPoint.Add(list_Point[indexPoint]);
+        //            }
+        //            // 从小到大排序
+        //            for (int iP = 0; iP < list_ConPoint.Count; iP++)
+        //            {
+        //                for (int iP2 = iP; iP2 < list_ConPoint.Count; iP2++)
+        //                {
+        //                    Cmou_Point temp_P = null;
+        //                    if (list_ConPoint[iP].V > list_ConPoint[iP2].V)
+        //                    {
+        //                        temp_P = list_ConPoint[iP2];
+        //                        list_ConPoint.RemoveAt(iP2);
+        //                        list_ConPoint.Insert(iP2, list_ConPoint[iP]);
+        //                        list_ConPoint[iP] = temp_P;
+        //                    }
+        //                }
+        //            }
 
-                    List<Cmou_ContourLine> list_Ps = new List<Cmou_ContourLine>();
-                    List<int> list_IndexRemove = new List<int>();
-                    while (list_ConPoint.Count>0)
-                    {
-                        list_IndexRemove.Clear();
-                        Cmou_ContourLine temp_Ps = new Cmou_ContourLine(0);
-                        int temp_IndexStart = -1;
-                        double temp_ValueStart = 0;
-                        double temp_ValueEnd = 0;
-                        for (int i = 0; i < list_ConPoint.Count;i++ )
-                        {
-                            if (i == 0)
-                            {
-                                temp_IndexStart = CTrace_AssertValue(list_ConPoint[i].V);
-                                temp_Ps.list_Point.Add(list_ConPoint[i]);
-                                temp_ValueStart = dData_CLineValue[temp_IndexStart];
-                                if (temp_IndexStart < dData_CLineValue.Length-1)
-                                {
-                                    temp_ValueEnd = dData_CLineValue[temp_IndexStart + 1];
-                                } 
-                                else
-                                {
-                                    temp_ValueEnd = dData_CLineValue[dData_CLineValue.Length- 1]*2.0;
-                                }
+        //            List<Cmou_ContourLine> list_Ps = new List<Cmou_ContourLine>();
+        //            List<int> list_IndexRemove = new List<int>();
+        //            while (list_ConPoint.Count>0)
+        //            {
+        //                list_IndexRemove.Clear();
+        //                Cmou_ContourLine temp_Ps = new Cmou_ContourLine(0);
+        //                int temp_IndexStart = -1;
+        //                double temp_ValueStart = 0;
+        //                double temp_ValueEnd = 0;
+        //                for (int i = 0; i < list_ConPoint.Count;i++ )
+        //                {
+        //                    if (i == 0)
+        //                    {
+        //                        temp_IndexStart = CTrace_AssertValue(list_ConPoint[i].V);
+        //                        temp_Ps.list_Point.Add(list_ConPoint[i]);
+        //                        temp_ValueStart = dData_CLineValue[temp_IndexStart];
+        //                        if (temp_IndexStart < dData_CLineValue.Length-1)
+        //                        {
+        //                            temp_ValueEnd = dData_CLineValue[temp_IndexStart + 1];
+        //                        } 
+        //                        else
+        //                        {
+        //                            temp_ValueEnd = dData_CLineValue[dData_CLineValue.Length- 1]*2.0;
+        //                        }
                                 
-                                list_IndexRemove.Add(i);
-                            }                           
-                            else
-                            {
-                                if(list_ConPoint[i].V <= temp_ValueEnd && list_ConPoint[i].V >= temp_ValueStart)
-                                {
-                                    temp_Ps.list_Point.Add(list_ConPoint[i]);
+        //                        list_IndexRemove.Add(i);
+        //                    }                           
+        //                    else
+        //                    {
+        //                        if(list_ConPoint[i].V <= temp_ValueEnd && list_ConPoint[i].V >= temp_ValueStart)
+        //                        {
+        //                            temp_Ps.list_Point.Add(list_ConPoint[i]);
 
-                                    if (list_ConPoint[i].V < temp_ValueEnd)
-                                        list_IndexRemove.Add(i);
-                                }
-                                else
-                                {                                   
-                                    break;
-                                }                               
-                            }
-                        }
+        //                            if (list_ConPoint[i].V < temp_ValueEnd)
+        //                                list_IndexRemove.Add(i);
+        //                        }
+        //                        else
+        //                        {                                   
+        //                            break;
+        //                        }                               
+        //                    }
+        //                }
 
-                        list_Ps.Add(temp_Ps);
-                        //temp_Ps = new Cmou_ContourLine(0);
-                        //删除前一个级别的等值点
-                        for (int j = 0; j < list_IndexRemove.Count; j++)
-                        {
-                            list_ConPoint.RemoveAt(list_IndexRemove[0]);
-                        }
+        //                list_Ps.Add(temp_Ps);
+        //                //temp_Ps = new Cmou_ContourLine(0);
+        //                //删除前一个级别的等值点
+        //                for (int j = 0; j < list_IndexRemove.Count; j++)
+        //                {
+        //                    list_ConPoint.RemoveAt(list_IndexRemove[0]);
+        //                }
 
-                        Cmou_ContourLine temp_Region = temp_Ps;
-                        if (temp_Region.list_Point.Count == 3)
-                        {
-                            list_Pss.Clear();
-                            ps = new System.Drawing.PointF[temp_Region.list_Point.Count];
-                            for (int ip = 0; ip < temp_Region.list_Point.Count; ip++)
-                            {
-                                ps[ip].X = Convert.ToSingle(temp_Region.list_Point[ip].X);
-                                ps[ip].Y = Convert.ToSingle(temp_Region.list_Point[ip].Y);
-                                System.Drawing.PointF p = new System.Drawing.PointF(ps[ip].X, ps[ip].Y);
-                                list_Pss.Add(p);
-                            }
-                            g.FillPolygon(new System.Drawing.SolidBrush(list_Color[temp_IndexStart]), (System.Drawing.PointF[])list_Pss.ToArray());
-                        } 
-                        else
-                        {
-                            double[] temp_Data_X = new double[temp_Region.list_Point.Count];
-                            double[] temp_Data_Y = new double[temp_Region.list_Point.Count];
-                            double[] temp_Data_V = new double[temp_Region.list_Point.Count];
+        //                Cmou_ContourLine temp_Region = temp_Ps;
+        //                if (temp_Region.list_Point.Count == 3)
+        //                {
+        //                    list_Pss.Clear();
+        //                    ps = new System.Drawing.PointF[temp_Region.list_Point.Count];
+        //                    for (int ip = 0; ip < temp_Region.list_Point.Count; ip++)
+        //                    {
+        //                        ps[ip].X = Convert.ToSingle(temp_Region.list_Point[ip].X);
+        //                        ps[ip].Y = Convert.ToSingle(temp_Region.list_Point[ip].Y);
+        //                        System.Drawing.PointF p = new System.Drawing.PointF(ps[ip].X, ps[ip].Y);
+        //                        list_Pss.Add(p);
+        //                    }
+        //                    g.FillPolygon(new System.Drawing.SolidBrush(list_Color[temp_IndexStart]), (System.Drawing.PointF[])list_Pss.ToArray());
+        //                } 
+        //                else
+        //                {
+        //                    double[] temp_Data_X = new double[temp_Region.list_Point.Count];
+        //                    double[] temp_Data_Y = new double[temp_Region.list_Point.Count];
+        //                    double[] temp_Data_V = new double[temp_Region.list_Point.Count];
 
-                            for (int ip = 0; ip < temp_Region.list_Point.Count; ip++)
-                            {
-                                temp_Data_X[ip] = temp_Region.list_Point[ip].X;
-                                temp_Data_Y[ip] = temp_Region.list_Point[ip].Y;
-                                temp_Data_V[ip] = temp_Region.list_Point[ip].V;
-                            }
+        //                    for (int ip = 0; ip < temp_Region.list_Point.Count; ip++)
+        //                    {
+        //                        temp_Data_X[ip] = temp_Region.list_Point[ip].X;
+        //                        temp_Data_Y[ip] = temp_Region.list_Point[ip].Y;
+        //                        temp_Data_V[ip] = temp_Region.list_Point[ip].V;
+        //                    }
 
-                            C_Trianglate temp_Trianglate = new C_Trianglate(temp_Data_X, temp_Data_Y, temp_Data_V);
-                            temp_Trianglate.Triangulate();
-                            temp_Trianglate.filltriangle(g,list_Color[temp_IndexStart]);
-                        }
+        //                    C_Trianglate temp_Trianglate = new C_Trianglate(temp_Data_X, temp_Data_Y, temp_Data_V);
+        //                    temp_Trianglate.Triangulate();
+        //                    temp_Trianglate.filltriangle(g,list_Color[temp_IndexStart]);
+        //                }
 
-                        temp_Ps = new Cmou_ContourLine(0);
-                    }
+        //                temp_Ps = new Cmou_ContourLine(0);
+        //            }
 
-                    // 填充三角形                   
-                    foreach (Cmou_ContourLine temp_Region in list_Ps)
-                    {
+        //            // 填充三角形                   
+        //            foreach (Cmou_ContourLine temp_Region in list_Ps)
+        //            {
                         
-                    }
-                }
-                else 
-                {
-                    list_Pss.Clear();
-                    ps = new System.Drawing.PointF[3];
-                    foreach (int indexPoint in temp_Tri.iPointIndex)
-                    {
-                        System.Drawing.PointF p = new System.Drawing.PointF(Convert.ToSingle(list_Point[indexPoint].X),
-                            Convert.ToSingle(list_Point[indexPoint].Y));
-                        list_Pss.Add(p);                    
-                    }
-                    int temp_Index = CTrace_AssertValue(list_Point[temp_Tri.iPointIndex[0]].V);
-                    g.FillPolygon(new System.Drawing.SolidBrush(
-                        list_Color[temp_Index]), 
-                        (System.Drawing.PointF[])list_Pss.ToArray());
-                }
-            }
-        }
+        //            }
+        //        }
+        //        else 
+        //        {
+        //            list_Pss.Clear();
+        //            ps = new System.Drawing.PointF[3];
+        //            foreach (int indexPoint in temp_Tri.iPointIndex)
+        //            {
+        //                System.Drawing.PointF p = new System.Drawing.PointF(Convert.ToSingle(list_Point[indexPoint].X),
+        //                    Convert.ToSingle(list_Point[indexPoint].Y));
+        //                list_Pss.Add(p);                    
+        //            }
+        //            int temp_Index = CTrace_AssertValue(list_Point[temp_Tri.iPointIndex[0]].V);
+        //            g.FillPolygon(new System.Drawing.SolidBrush(
+        //                list_Color[temp_Index]), 
+        //                (System.Drawing.PointF[])list_Pss.ToArray());
+        //        }
+        //    }
+        //}
 
         //======= 判断等值线之属性值 ==========================================
         private int CTrace_AssertValue(double d_ValueIN)
