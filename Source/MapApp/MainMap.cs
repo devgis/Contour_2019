@@ -196,7 +196,7 @@ namespace DEVGIS.MapAPP
             MapInfo.Data.Table table=flContourLayer.Table;
             if (table != null) //Table exists close it
             {
-                si = MapInfo.Data.SearchInfoFactory.SearchWhere("1==1");
+                si = MapInfo.Data.SearchInfoFactory.SearchWhere("1=1");
                 ifs = MapInfo.Engine.Session.Current.Catalog.Search(table, si);
                 foreach (Feature ft in ifs)
                 {
@@ -276,7 +276,7 @@ namespace DEVGIS.MapAPP
                 {
                     dPoints.Add(new DPoint(conLine.list_Point[iP].X, conLine.list_Point[iP].Y));
                 }
-                if (conLine.conType == ContourLineType.Closed)
+                if (conLine.conType == ContourLineType.Closed && conLine.list_Point.Count>0)
                 {
                     dPoints.Add(new DPoint(conLine.list_Point[0].X, conLine.list_Point[0].Y));
                 }
@@ -312,7 +312,7 @@ namespace DEVGIS.MapAPP
             //double dMin_Y = 9999999999;
             //double dMax_Z = -9999999999;
             //double dMin_Z = 9999999999;
-            FeatureLayer flLayer = mapControl1.Map.Layers["LayerName"] as FeatureLayer;
+            FeatureLayer flLayer = mapControl1.Map.Layers[LayerName] as FeatureLayer;
             List<TData> datas = new List<TData>();
             if (flLayer != null)
             {

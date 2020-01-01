@@ -72,9 +72,9 @@ namespace DEVGIS.MapAPP
                 return;
             }
 
-            if (cbPropertis.SelectedText != null)
+            if (cbPropertis.Text != null)
             {
-                PropertyName = cbPropertis.SelectedText;
+                PropertyName = cbPropertis.Text;
             }
             else
             {
