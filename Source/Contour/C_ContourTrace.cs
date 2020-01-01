@@ -18,7 +18,7 @@ namespace DEVGIS.Contour
         }
 
         //------- 相关属性操作 -------
-        int    iNum_ContourLine = 10; // 等值线的数目
+        int    iNum_ContourLine = 100; // 等值线的数目
         public double d_Max;                 // 等值线最大值
         public double d_Min;                 // 等值线最小值
         double[] dData_CLineValue;    // 等值线具体值构成的数组
