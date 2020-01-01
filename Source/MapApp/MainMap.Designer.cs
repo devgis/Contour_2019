@@ -249,14 +249,14 @@
             // tsmiGenerateContour
             // 
             this.tsmiGenerateContour.Name = "tsmiGenerateContour";
-            this.tsmiGenerateContour.Size = new System.Drawing.Size(180, 22);
+            this.tsmiGenerateContour.Size = new System.Drawing.Size(152, 22);
             this.tsmiGenerateContour.Text = "生成等值面(&C)";
             this.tsmiGenerateContour.Click += new System.EventHandler(this.tsmiGenerateContour_Click);
             // 
             // tsmiAverage
             // 
             this.tsmiAverage.Name = "tsmiAverage";
-            this.tsmiAverage.Size = new System.Drawing.Size(180, 22);
+            this.tsmiAverage.Size = new System.Drawing.Size(152, 22);
             this.tsmiAverage.Text = "计算平均值(&A)";
             this.tsmiAverage.Click += new System.EventHandler(this.tsmiAverage_Click);
             // 

@@ -21,3 +21,4 @@ D:\Work\GitHub\Contour_2019\Source\MapApp\obj\Debug\DEVGIS.MapAPP.MainMap.resour
 D:\GitHub\Contour_2019\Source\MapApp\obj\Debug\DEVGIS.MapAPP.MainMap.resources
 D:\GitHub\Contour_2019\Source\MapApp\obj\Debug\DEVGIS.MapAPP.SelectLayer.resources
 D:\GitHub\Contour_2019\Source\MapApp\obj\Debug\DEVGIS.MapAPP.SelectProperties.resources
+D:\Work\GitHub\Contour_2019\Source\MapApp\obj\Debug\DEVGIS.MapAPP.SelectProperties.resources

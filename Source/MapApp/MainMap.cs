@@ -388,54 +388,50 @@ namespace DEVGIS.MapAPP
                 if (layer is FeatureLayer)
                 {
                     FeatureLayer flayer = layer as FeatureLayer;
+                    if (layername.Equals(flayer.Name.Trim()))
+                    {
+                        continue;
+                    }
                     LayerItem item = new LayerItem();
                     item.DisplayName = flayer.Alias;
                     item.LayerName = flayer.Name;
                     item.Propertys = new List<string>();
                     if (numeric)
                     {
-                        foreach (object prop in flayer.CustomProperties.Keys)
+                        foreach (Column column in flayer.Table.TableInfo.Columns)
                         {
-                            if(flayer.Table.TableInfo.Columns[prop.ToString()].DataType==MIDbType.dBaseDecimal
-                                || flayer.Table.TableInfo.Columns[prop.ToString()].DataType == MIDbType.Double
-                                || flayer.Table.TableInfo.Columns[prop.ToString()].DataType == MIDbType.Int
-                                || flayer.Table.TableInfo.Columns[prop.ToString()].DataType == MIDbType.SmallInt)
+                            if ("Obj".Equals(column.Alias)
+                                || "MI_Style".Equals(column.Alias))
                             {
-                                item.Propertys.Add(prop.ToString());
+                                continue;
+                            }
+                            if (column.ColumnType == ColumnType.Physical
+                                &&(column.DataType == MIDbType.dBaseDecimal
+                                || column.DataType == MIDbType.Double
+                                || column.DataType == MIDbType.Int
+                                || column.DataType == MIDbType.SmallInt))
+                            {
+                                item.Propertys.Add(column.Alias);
                             }
                         }
                     }
                     else
                     {
-                        foreach (var prop in flayer.CustomProperties.Keys)
+                        foreach (Column column in flayer.Table.TableInfo.Columns)
                         {
-
-                            item.Propertys.Add(prop.ToString());
+                            if ("Obj".Equals(column.Alias)
+                                || "MI_Style".Equals(column.Alias))
+                            {
+                                continue;
+                            }
+                            if (column.ColumnType == ColumnType.Physical)
+                            {
+                                item.Propertys.Add(column.Alias);
+                            }
+                            
                         }
                     }
-                    
-                }
-            }
-            return items;
-        }
-
-        private List<LayerItem> GetLayerItems()
-        {
-            List<LayerItem> items = new List<LayerItem>();
-            foreach (var layer in mapControl1.Map.Layers)
-            {
-                if (layer is FeatureLayer)
-                {
-                    FeatureLayer flayer = layer as FeatureLayer;
-                    LayerItem item = new LayerItem();
-                    item.DisplayName = flayer.Alias;
-                    item.LayerName = flayer.Name;
-                    item.Propertys = new List<string>();
-                    foreach (var prop in flayer.CustomProperties.Keys)
-                    {
-
-                        item.Propertys.Add(prop.ToString());
-                    }
+                    items.Add(item);
                 }
             }
             return items;
@@ -456,7 +452,14 @@ namespace DEVGIS.MapAPP
                     foreach (Feature ft in flavglayer.Table)
                     {
                         count++;
-                        dictValues[key] += Convert.ToDouble(ft["key"]); //求和
+                        try
+                        {
+                            dictValues[key] += Convert.ToDouble(ft[key]); //求和
+                        }
+                        catch(Exception ex)
+                        {
+                            Loger.WriteLog(ex);
+                        }
                     }
                     dictValues[key] = dictValues[key] / count;//求平均数
                 }
@@ -464,10 +467,8 @@ namespace DEVGIS.MapAPP
                 foreach (string key in dictValues.Keys)
                 {
                     sb.AppendLine(string.Format("属性[{0}] 平均值{1}", key, dictValues[key]));
-                    MessageHelper.ShowInfo(sb.ToString());
-                    return;
                 }
-                MessageHelper.ShowError("计算项！");
+                MessageHelper.ShowInfo(sb.ToString());
             }
         }
         #endregion

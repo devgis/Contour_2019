@@ -122,6 +122,7 @@
             // cbLayers
             // 
             this.cbLayers.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cbLayers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbLayers.FormattingEnabled = true;
             this.cbLayers.Location = new System.Drawing.Point(160, 13);
             this.cbLayers.Name = "cbLayers";
