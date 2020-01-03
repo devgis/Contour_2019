@@ -56,6 +56,8 @@
             this.tsmiHelper = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tsmiLoadTab = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiExportTab = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -211,6 +213,8 @@
             this.系统SToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiOpen,
             this.tsmiExport,
+            this.tsmiLoadTab,
+            this.tsmiExportTab,
             this.tsmiExit});
             this.系统SToolStripMenuItem.Name = "系统SToolStripMenuItem";
             this.系统SToolStripMenuItem.Size = new System.Drawing.Size(59, 21);
@@ -219,21 +223,21 @@
             // tsmiOpen
             // 
             this.tsmiOpen.Name = "tsmiOpen";
-            this.tsmiOpen.Size = new System.Drawing.Size(118, 22);
+            this.tsmiOpen.Size = new System.Drawing.Size(180, 22);
             this.tsmiOpen.Text = "打开(&O)";
             this.tsmiOpen.Click += new System.EventHandler(this.tsmiOpen_Click);
             // 
             // tsmiExport
             // 
             this.tsmiExport.Name = "tsmiExport";
-            this.tsmiExport.Size = new System.Drawing.Size(118, 22);
+            this.tsmiExport.Size = new System.Drawing.Size(180, 22);
             this.tsmiExport.Text = "导出(&X)";
             this.tsmiExport.Click += new System.EventHandler(this.tsmiExport_Click);
             // 
             // tsmiExit
             // 
             this.tsmiExit.Name = "tsmiExit";
-            this.tsmiExit.Size = new System.Drawing.Size(118, 22);
+            this.tsmiExit.Size = new System.Drawing.Size(180, 22);
             this.tsmiExit.Text = "退出(&E)";
             this.tsmiExit.Click += new System.EventHandler(this.tsmiExit_Click);
             // 
@@ -249,14 +253,14 @@
             // tsmiGenerateContour
             // 
             this.tsmiGenerateContour.Name = "tsmiGenerateContour";
-            this.tsmiGenerateContour.Size = new System.Drawing.Size(152, 22);
+            this.tsmiGenerateContour.Size = new System.Drawing.Size(180, 22);
             this.tsmiGenerateContour.Text = "生成等值面(&C)";
             this.tsmiGenerateContour.Click += new System.EventHandler(this.tsmiGenerateContour_Click);
             // 
             // tsmiAverage
             // 
             this.tsmiAverage.Name = "tsmiAverage";
-            this.tsmiAverage.Size = new System.Drawing.Size(152, 22);
+            this.tsmiAverage.Size = new System.Drawing.Size(180, 22);
             this.tsmiAverage.Text = "计算平均值(&A)";
             this.tsmiAverage.Click += new System.EventHandler(this.tsmiAverage_Click);
             // 
@@ -301,6 +305,20 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(782, 362);
             this.tableLayoutPanel1.TabIndex = 5;
+            // 
+            // tsmiLoadTab
+            // 
+            this.tsmiLoadTab.Name = "tsmiLoadTab";
+            this.tsmiLoadTab.Size = new System.Drawing.Size(180, 22);
+            this.tsmiLoadTab.Text = "加载Tab文件(&J)";
+            this.tsmiLoadTab.Click += new System.EventHandler(this.tsmiLoadTab_Click);
+            // 
+            // tsmiExportTab
+            // 
+            this.tsmiExportTab.Name = "tsmiExportTab";
+            this.tsmiExportTab.Size = new System.Drawing.Size(180, 22);
+            this.tsmiExportTab.Text = "导出Tab文件(D)";
+            this.tsmiExportTab.Click += new System.EventHandler(this.tsmiExportTab_Click);
             // 
             // MainMap
             // 
@@ -357,6 +375,8 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiAbout;
         private System.Windows.Forms.ToolStripMenuItem tsmiGenerateContour;
         private System.Windows.Forms.ToolStripMenuItem tsmiAverage;
+        private System.Windows.Forms.ToolStripMenuItem tsmiLoadTab;
+        private System.Windows.Forms.ToolStripMenuItem tsmiExportTab;
     }
 }
 

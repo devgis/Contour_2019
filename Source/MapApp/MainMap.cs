@@ -148,6 +148,48 @@ namespace DEVGIS.MapAPP
                 MessageHelper.ShowInfo("出现未知异常:"+ ex.Message);
             }
         }
+
+        private void tsmiLoadTab_Click(object sender, EventArgs e)
+        {
+            OpenTab();
+        }
+
+        private void tsmiExportTab_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (currentData != null && currentData.Count > 0)
+                {
+                    try
+                    {
+                        if (currentData != null && currentData.Count > 0)
+                        {
+                            SaveTab();
+                            MessageHelper.ShowInfo("导出成功！");
+                        }
+                        else
+                        {
+                            MessageHelper.ShowError("无可用数据导出,请先生成!");
+                        }
+
+                    }
+                    catch (Exception ex)
+                    {
+                        Loger.WriteLog(ex);
+                        MessageHelper.ShowInfo("出现未知异常:" + ex.Message);
+                    }
+                }
+                else
+                {
+                    MessageHelper.ShowError("无可用数据导出,请先生成!");
+                }
+            }
+            catch (Exception ex)
+            {
+                Loger.WriteLog(ex);
+                MessageHelper.ShowInfo("出现未知异常:" + ex.Message);
+            }
+        }
         #endregion
 
         #region 私有方法
@@ -248,6 +290,22 @@ namespace DEVGIS.MapAPP
             }
         }
 
+        private void SaveTab()
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = string.Format("Mapinfo tab文件|*.tab", fileext);
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                string filename = sfd.FileName;
+                if (!filename.EndsWith(".tab"))
+                {
+                    filename += ".tab" ;
+                }
+                flContourLayer.Table.TableInfo.TablePath = filename;
+                flContourLayer.Table.TableInfo.WriteTabFile();
+            }
+        }
+
         private void OpenData()
         {
             OpenFileDialog ofd = new OpenFileDialog();
@@ -263,6 +321,24 @@ namespace DEVGIS.MapAPP
                 {
                     Loger.WriteLog(ex);
                     MessageHelper.ShowError("保存数据出错：" + ex.Message);
+                }
+            }
+        }
+
+        private void OpenTab()
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = string.Format("Mapinfo tab文件|*.tab", fileext);
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    mapControl1.Map.Load(new MapTableLoader(ofd.FileName));  // add table
+                }
+                catch (Exception ex)
+                {
+                    Loger.WriteLog(ex);
+                    MessageHelper.ShowError("打开数据出错：" + ex.Message);
                 }
             }
         }
@@ -487,5 +563,7 @@ namespace DEVGIS.MapAPP
             }
         }
         #endregion
+
+       
     }
 }
