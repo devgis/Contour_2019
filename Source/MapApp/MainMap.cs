@@ -333,7 +333,10 @@ namespace DEVGIS.MapAPP
             {
                 try
                 {
-                    mapControl1.Map.Load(new MapTableLoader(ofd.FileName));  // add table
+                    MapInfo.Data.Table tab = MapInfo.Engine.Session.Current.Catalog.OpenTable(ofd.FileName);
+                    MapInfo.Mapping.FeatureLayer fl = new MapInfo.Mapping.FeatureLayer(tab);
+                    mapControl1.Map.Layers.Add(fl);
+                    //this.MapControl1.SelectableLayers.Add(fl.Name);
                 }
                 catch (Exception ex)
                 {
