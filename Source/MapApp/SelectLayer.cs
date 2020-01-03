@@ -24,6 +24,12 @@ namespace DEVGIS.MapAPP
             set;
         }
 
+        public int Level
+        {
+            get;
+            set;
+        }
+
         List<LayerItem> layerItems=null;
         public SelectLayer(List<LayerItem> LayerItems )
         {
@@ -69,6 +75,7 @@ namespace DEVGIS.MapAPP
             else
             {
                 MessageHelper.ShowError("请选择图层！");
+                cbLayers.Focus();
                 return;
             }
 
@@ -79,11 +86,21 @@ namespace DEVGIS.MapAPP
             else
             {
                 MessageHelper.ShowError("请选择属性！");
+                cbPropertis.Focus();
+                return;
+            }
+
+            Level = (int)nuLevel.Value;
+            if (Level < 10 || Level > 100)
+            {
+                MessageHelper.ShowError("Level为10~100之间的整数！");
+                nuLevel.Focus();
                 return;
             }
 
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
+
     }
 }

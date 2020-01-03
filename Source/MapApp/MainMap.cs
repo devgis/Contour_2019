@@ -122,7 +122,7 @@ namespace DEVGIS.MapAPP
             SelectLayer selectLayer = new SelectLayer(layerinfos);
             if (selectLayer.ShowDialog() == DialogResult.OK)
             {
-                DrowContour(selectLayer.LayerName, selectLayer.PropertyName);
+                DrowContour(selectLayer.LayerName, selectLayer.PropertyName, selectLayer.Level);
             }
         }
 
@@ -267,9 +267,10 @@ namespace DEVGIS.MapAPP
             }
         }
 
-        private void DrowContour(string LayerName, string PropertyName)
+        private void DrowContour(string LayerName, string PropertyName, int level)
         {
             var conTrace = new C_ContourTrace(GetData(LayerName, PropertyName));
+            conTrace.iNum_ContourLine = level;
             conTrace.d_Max = dMax_Z;
             conTrace.d_Min = dMin_Z;
             conTrace.CTrace_ContourLineTrace();

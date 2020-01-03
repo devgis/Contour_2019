@@ -36,8 +36,11 @@
             this.label2 = new System.Windows.Forms.Label();
             this.cbLayers = new System.Windows.Forms.ComboBox();
             this.cbPropertis = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.nuLevel = new System.Windows.Forms.NumericUpDown();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nuLevel)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -47,17 +50,20 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 300F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Controls.Add(this.panel1, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this.panel1, 1, 5);
             this.tableLayoutPanel1.Controls.Add(this.label1, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label2, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.cbLayers, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.cbPropertis, 2, 2);
+            this.tableLayoutPanel1.Controls.Add(this.label3, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.label2, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.nuLevel, 2, 3);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 6;
+            this.tableLayoutPanel1.RowCount = 7;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -101,7 +107,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(60, 92);
+            this.label1.Location = new System.Drawing.Point(60, 77);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(32, 17);
             this.label1.TabIndex = 1;
@@ -110,18 +116,18 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(60, 122);
+            this.label2.Location = new System.Drawing.Point(60, 137);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(32, 17);
             this.label2.TabIndex = 2;
-            this.label2.Text = "属性";
+            this.label2.Text = "级数";
             // 
             // cbLayers
             // 
             this.cbLayers.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cbLayers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbLayers.FormattingEnabled = true;
-            this.cbLayers.Location = new System.Drawing.Point(160, 95);
+            this.cbLayers.Location = new System.Drawing.Point(160, 80);
             this.cbLayers.Name = "cbLayers";
             this.cbLayers.Size = new System.Drawing.Size(294, 25);
             this.cbLayers.TabIndex = 3;
@@ -132,10 +138,37 @@
             this.cbPropertis.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cbPropertis.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbPropertis.FormattingEnabled = true;
-            this.cbPropertis.Location = new System.Drawing.Point(160, 125);
+            this.cbPropertis.Location = new System.Drawing.Point(160, 110);
             this.cbPropertis.Name = "cbPropertis";
             this.cbPropertis.Size = new System.Drawing.Size(294, 25);
             this.cbPropertis.TabIndex = 4;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(60, 107);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(32, 17);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "属性";
+            // 
+            // nuLevel
+            // 
+            this.nuLevel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.nuLevel.Location = new System.Drawing.Point(160, 140);
+            this.nuLevel.Minimum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.nuLevel.Name = "nuLevel";
+            this.nuLevel.Size = new System.Drawing.Size(294, 23);
+            this.nuLevel.TabIndex = 6;
+            this.nuLevel.Value = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
             // 
             // SelectLayer
             // 
@@ -153,6 +186,7 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.nuLevel)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -167,5 +201,7 @@
         private System.Windows.Forms.ComboBox cbLayers;
         private System.Windows.Forms.ComboBox cbPropertis;
         private System.Windows.Forms.Button btCancel;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.NumericUpDown nuLevel;
     }
 }
