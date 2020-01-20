@@ -1,0 +1,15 @@
+!table
+!version 300
+!charset WindowsSimpChinese
+
+Definition Table
+  Type NATIVE Charset "WindowsSimpChinese"
+  Fields 8
+    采样点编号 Char (12) ;
+    JD Decimal (12, 8) ;
+    WD Decimal (12, 8) ;
+    碱解氮 Float Index 1 ;
+    有效磷 Float ;
+    有效钾 Float ;
+    有机质 Float ;
+    有效锌 Float ;

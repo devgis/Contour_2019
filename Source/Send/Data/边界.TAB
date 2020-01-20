@@ -1,0 +1,9 @@
+!table
+!version 700
+!charset WindowsSimpChinese
+
+Definition Table
+  Type NATIVE Charset "WindowsSimpChinese"
+  Fields 2
+    乡名 Char (30) ;
+    乡代码 Char (20) ;

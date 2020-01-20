@@ -1,5 +1,3 @@
-D:\GitHub\Contour_2019\Source\Common\obj\Debug\Common.csprojAssemblyReference.cache
-D:\GitHub\Contour_2019\Source\Common\obj\Debug\Common.csproj.CoreCompileInputs.cache
 D:\GitHub\Contour_2019\Source\Common\bin\Debug\Common.dll
 D:\GitHub\Contour_2019\Source\Common\bin\Debug\Common.pdb
 D:\GitHub\Contour_2019\Source\Common\obj\Debug\Common.dll

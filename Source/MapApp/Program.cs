@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using DEVGIS.Common;
 
 namespace DEVGIS.MapAPP
 {
@@ -14,8 +15,14 @@ namespace DEVGIS.MapAPP
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            
-            Application.Run(new MainMap());
+
+            var main = new MainMap();
+            if(DateTime.Now.Date>new DateTime(2020,03,01))
+            {
+                MessageHelper.ShowError("试用版已过期 请联系 devgis@qq.com!获取授权");
+                main.Text = "试用版已过期 请联系 devgis@qq.com!获取授权";
+            }
+            Application.Run(main);
         }
     }
 }
